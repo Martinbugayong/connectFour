@@ -1,0 +1,45 @@
+h1 {
+    text-align: center;
+}
+
+#board {
+    display: flex;
+    align-items: center;
+    /* flex-direction: row; */
+    flex: 1;
+    max-width: 100px;
+}
+
+.col {
+    display: flex;
+    flex: 1;
+    background-color: black;
+    flex-direction: column-reverse;
+    
+}
+
+.col:hover .row {
+    background-color: #111;
+}
+
+.row {
+    display: flex;
+    border: 1px solid red;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.red {
+    background-color: red;
+}
+
+.disc {
+    height: 100%;
+    width: 100%;
+}
