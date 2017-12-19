@@ -5,15 +5,22 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#message {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-family: sans-serif;
+    font-size: 25px;
+}
+
 #board {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex: 1;
     max-width: 100px;
     max-height: 100px;
     margin: 0 auto;
-    padding-top: 150px;
 }
 
 .col {
@@ -24,12 +31,11 @@ h1 {
 }
 
 .col:hover .row {
-    background-color: gray;
+    background-color: lightgray;
 }
 
-.row {
+div.col div {
     display: flex;
-    /* border: 1px solid gainsboro; */
     background-color: gainsboro;
     opacity: 50%;
     height: 50px;
@@ -56,4 +62,11 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#message {
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    font-size: 25px;
 }
