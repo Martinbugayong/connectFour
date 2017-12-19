@@ -30,8 +30,10 @@ h1 {
     
 }
 
-.col:hover .row {
+.col:hover div {
     background-color: lightgray;
+    transform: scale(.90);
+    transition: .25s;
 }
 
 div.col div {
