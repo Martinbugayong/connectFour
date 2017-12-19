@@ -2,22 +2,24 @@
 // == ---> COMPARE (Expression, equates to true or false) (1 === true) is true
 // === ---> COMPARES but STRICTER, must be same type. (1 === true) is false
 
-/*----- constants -----*/
-// create your constant variables. These will never change. 
+/*----- CONSTANTS (these will never change) -----*/
 var player1 = 'r';
 var player2 = 'b';
-// /*----- app's state (variables) -----*/ 
+
+/*----- APP'S STATE (variables) -----*/ 
 var whosTurn;
-var board;
+var grid;
 var winner;
 
-/*----- cached element references -----*/
+/*----- CACHED ELEMENT REFERENCES -----*/
 var msgEl = document.getElementById('message');
 
-/*----- functions -----*/
-// Create an initialize function with a board array of columns and rows. 
-function init() {
-    board = [
+/*----- EVENT LISTINERS -----*/
+document.getElementById('grid').addEventListener('click', handleClick) //entire grid is clickable 
+
+/*----- MAIN FUNCTIONS -----*/
+function init() { // Create a function (initialize) with a grid array of columns(down) and rows(across) 
+    grid = [
         [null, null, null, null, null, null],
         [null, null, null, null, null, null],
         [null, null, null, null, null, null],
@@ -30,84 +32,38 @@ function init() {
     winner = false;
 }
 
-/*----- event listeners -----*/
-document.getElementById('board').addEventListener('click', handleClick)
-// document.getElementById('col0').addEventListener('click', handleClick)
-// document.getElementById('col1').addEventListener('click', handleClick)
-// document.getElementById('col2').addEventListener('click', handleClick)
-// document.getElementById('col3').addEventListener('click', handleClick)
-// document.getElementById('col4').addEventListener('click', handleClick)
-// document.getElementById('col5').addEventListener('click', handleClick)
-// document.getElementById('col6').addEventListener('click', handleClick)
-
-function handleClick(e) {
-    var colDiv = e.target.id ? e.target : e.target.parentElement;
-    var colIdx = parseInt(colDiv.id.replace('col', ''));
-    var column = board[colIdx];
-    var firstAvalSlot = column.indexOf(null);
-    if (firstAvalSlot === -1) return;
-    column[firstAvalSlot] = whosTurn; 
-    whosTurn = (whosTurn === player1) ? player2 : player1;
-    /*----- check for winner -----*/
-    winner = getWinner();
-    render();
+/*----- handle click -----*/
+function handleClick(e) { // create function that handles clicking of the game grid.
+    var colDiv = e.target.id ? e.target : e.target.parentElement; // setting colDiv to event target id ternary 
+    var colIdx = parseInt(colDiv.id.replace('col', '')); //setting colIdx value
+    var column = grid[colIdx]; // setting column to grid value of [colIdx]
+    var firstAvalSlot = column.indexOf(null); // setting firstAvalSlot to the indexof column lookiong for (null)
+    if (firstAvalSlot === -1) return; // if firstAvalSlot is equal to -1 (no slots avaliable)
+    column[firstAvalSlot] = whosTurn; // setting whosTurn to column value of firstAvalSlot
+    whosTurn = (whosTurn === player1) ? player2 : player1; // Ternary, setting whos turn to player 1 or 2. (Switch turn function)
+    winner = getWinner(); // check for winner here
+    render(); // render function out here 
 }
 
-// write a function to switch turns
-// function switchTurn() {
-//     if (whosTurn === player1) { //if whosTurn player 1 is true 
-//         whosTurn = player2 // then set it to player 2
-//     } else {
-//         whosTurn = player1 // else its set back to player 1
-//     }
-//     document.getElementById('message').innerHTML = "It's " + whosTurn + ' turn...'
-// }
-
-// if col0 was clicked then add disk to col0
-// function that renders state board values onto dom board
+/*----- render function -----*/
 function render() {
-    for (var i = 0; i < board.length; i++) { // for loop that goes through board
-        var columnDivs = document.querySelectorAll(`#col${i} div`);
-        for (var j = 0; j < board[i].length; j++) {
-            if (board[i][j]) columnDivs[j].style.backgroundColor = board[i][j] === 'r' ? 'red' : 'black';
-            // if slot is r log 'red', if slot is b log 'black'
-            // if (board[i][j] === 'r') { // if the board coordinate is r then its red
-            //     slot.innerHTML = '<div class="disc red"></div>' //'#col0 .row' returns array of rows inside current column
-            // } else if (board[i][j] === 'b') { // if the board coordinate is not red then its black
-            //     slot.innerHTML = '<div class="disc black"></div>' //'#col0 .row' returns array of rows inside current column
-            // } else { //if its not these things
-            //     slot.innerHTML = '' //'#col0 .row' returns array of rows inside current column
-            // }
+    for (var i = 0; i < grid.length; i++) { // for loop that iterated through grid arrays (columns)
+        var columnDivs = document.querySelectorAll(`#col${i} div`); // setting columnDivs to the column id and div number (coordinates)
+        for (var j = 0; j < grid[i].length; j++) { // for loop setting var J to itterate through the grid[i].length which are the rows
+            if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'r' ? 'red' : 'black'; // in JS styling for moves using ternary operator. 
         }
     }
-    if (winner) {
-        msgEl.innerHTML = 'Congrats, to player ' + (winner === player1 ? 'Red' : 'Black'); 
-    } else {
-        msgEl.innerHTML = 'Player\'s ' + (whosTurn === player1 ? 'Red' : 'Black') + ' Turn'; 
+    if (winner) { // winning messages 
+        msgEl.innerHTML = 'Congrats, to player ' + (winner === player1 ? 'Red' : 'Black'); // if conditions have been met game renders this
+    } else { // if no one wins
+        msgEl.innerHTML = 'Player ' + (whosTurn === player1 ? '1\'s' : '2\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
 
     }
 }
 
-function getWinner() {
+function getWinner() { // winning game logic. 
 
 }
 
-/*----- win condition -----*/
-// I need to check for rows, columns, and diagonaly    
-// using For loops, if statements and array indexing.
-// var x = [
-//     ["a", "b", "c"], 
-//     ["d", "e", "f"], 
-//     ["g", "h", "i"]
-// ]
-
-// for (var row=2; row >=0; row--) {
-//     for (col=0; col < 3; col++) {
-//         console.log(`Coordinates are (${col}, ${row})`)
-//         console.log(x[row][col])
-//     }
-// }
-
-
-init();
-render();
+init(); // calling initiate
+render(); // calling render

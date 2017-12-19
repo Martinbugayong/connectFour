@@ -13,7 +13,7 @@ h1 {
     font-size: 25px;
 }
 
-#board {
+#grid {
     display: flex;
     justify-content: center;
     align-items: flex-start;
