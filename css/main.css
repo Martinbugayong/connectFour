@@ -25,7 +25,7 @@ h1 {
 .col:hover div {
     background-color: lightgray;
     transform: scale(.90);
-    transition: .25s;
+    transition: .07s;
 }
 
 div.col div {
