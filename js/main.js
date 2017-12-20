@@ -36,8 +36,8 @@ function handleClick(e) { // create function that handles clicking of the game g
     var firstAvalSlot = column.indexOf(''); // setting firstAvalSlot to the indexof column lookiong for ('')
     if (firstAvalSlot === -1) return; // if firstAvalSlot is equal to -1 (no slots avaliable)
     column[firstAvalSlot] = whosTurn; // setting whosTurn to column value of firstAvalSlot
-    whosTurn = (whosTurn === player1) ? player2 : player1; // Ternary, setting whos turn to player 1 or 2. (Switch turn function)
     winner = getWinner(); // check for winner here
+    whosTurn = (whosTurn === player1) ? player2 : player1; // Ternary, setting whos turn to player 1 or 2. (Switch turn function)
     render(); // render function out here 
 }
 
@@ -50,7 +50,7 @@ function render() {
         }
     }
     if (winner) { // winning messages 
-        msgEl.innerHTML = 'Congrats, to player ' + (winner === player1 ? 'Red' : 'Yellow'); // if conditions have been met game renders this
+        msgEl.innerHTML = `Congrats! ${(winner === player1 ? 'Red' : 'Yellow')} Player Wins!`; // if conditions have been met game renders this
     } else { // if no one wins
         msgEl.innerHTML = 'Player ' + (whosTurn === player1 ? '1\'s' : '2\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
 
@@ -61,25 +61,27 @@ function getWinner() { // winning game logic.
     // checkVertical
     for (var i = 0; i < grid.length; i++) {
         if (
-            (grid[i][0] === grid[i][1] && grid[i][0] === grid[i][2] && grid[i][0] === grid[i][3]) ||
-            (grid[i][1] === grid[i][2] && grid[i][1] === grid[i][3] && grid[i][1] === grid[i][4]) ||
-            (grid[i][2] === grid[i][3] && grid[i][2] === grid[i][4] && grid[i][2] === grid[i][5]) 
-        ) { 
-            return true;
+            (grid[i][0] && grid[i][0] === grid[i][1] && grid[i][0] === grid[i][2] && grid[i][0] === grid[i][3]) ||
+            (grid[i][1] && grid[i][1] === grid[i][2] && grid[i][1] === grid[i][3] && grid[i][1] === grid[i][4]) ||
+            (grid[i][2] && grid[i][2] === grid[i][3] && grid[i][2] === grid[i][4] && grid[i][2] === grid[i][5])
+        ) {
+            return whosTurn;
         }
     }
     // checkHorizontal
-    for (var j = 0; j < grid[0].length; j++){
+    for (var j = 0; j < grid[0].length; j++) {
         if (
-            (grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j]) ||
-            (grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j]) ||
-            (grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j])
-        ){
-            return true;
+            (grid[0][j] && grid[0][j] === grid[1][j] && grid[0][j] === grid[2][j] && grid[0][j] === grid[3][j]) ||
+            (grid[1][j] && grid[1][j] === grid[2][j] && grid[1][j] === grid[3][j] && grid[1][j] === grid[4][j]) ||
+            (grid[2][j] && grid[2][j] === grid[3][j] && grid[2][j] === grid[4][j] && grid[2][j] === grid[5][j]) ||
+            (grid[3][j] && grid[3][j] === grid[4][j] && grid[3][j] === grid[5][j] && grid[3][j] === grid[6][j])
+        ) {
+            return whosTurn;
         }
     }
-    
+}
     // checkDiagonal
+    
 
 init(); // calling initiate
 render(); // calling render
