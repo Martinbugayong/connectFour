@@ -65,7 +65,7 @@ function getWinner() { // winning game logic.
             (grid[i][1] && grid[i][1] === grid[i][2] && grid[i][1] === grid[i][3] && grid[i][1] === grid[i][4]) ||
             (grid[i][2] && grid[i][2] === grid[i][3] && grid[i][2] === grid[i][4] && grid[i][2] === grid[i][5])
         ) {
-            return whosTurn;
+            return whosTurn || winner;
         }
     }
     // check Horizontal
@@ -76,95 +76,139 @@ function getWinner() { // winning game logic.
             (grid[2][j] && grid[2][j] === grid[3][j] && grid[2][j] === grid[4][j] && grid[2][j] === grid[5][j]) ||
             (grid[3][j] && grid[3][j] === grid[4][j] && grid[3][j] === grid[5][j] && grid[3][j] === grid[6][j])
         ) {
-            return whosTurn;
+            return whosTurn || winner;
         }
     }
+
+    if (
+        (grid[0][0] && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2] && grid[0][0] === grid[3][3]) ||
+        (grid[0][1] && grid[0][1] === grid[1][2] && grid[0][1] === grid[2][3] && grid[0][1] === grid[3][4]) ||
+        (grid[0][2] && grid[0][2] === grid[1][3] && grid[0][2] === grid[2][4] && grid[0][2] === grid[3][5])
+    ) {
+        return whosTurn || winner;
+    }
     
+    if (
+        (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
+        (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
+        (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[2][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
+        (grid[2][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
+        (grid[2][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[3][0] && grid[3][0] === grid[4][1] && grid[3][0] === grid[5][2] && grid[3][0] === grid[6][3]) ||
+        (grid[3][1] && grid[3][1] === grid[4][2] && grid[3][1] === grid[5][3] && grid[3][1] === grid[6][4]) ||
+        (grid[3][2] && grid[3][2] === grid[4][3] && grid[3][2] === grid[5][4] && grid[3][2] === grid[6][5])
+    ) {
+        return whosTurn || winner;
+    }
+    // starting at bottom right [6][0]
+    if (
+        (grid[6][0] && grid[6][0] === grid[5][1] && grid[6][0] === grid[4][2] && grid[6][0] === grid[3][3]) ||
+        (grid[6][1] && grid[6][1] === grid[5][2] && grid[6][1] === grid[4][3] && grid[6][1] === grid[3][4]) ||
+        (grid[6][2] && grid[6][2] === grid[5][3] && grid[6][2] === grid[4][4] && grid[6][2] === grid[3][5])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[5][0] && grid[5][0] === grid[4][1] && grid[5][0] === grid[3][2] && grid[5][0] === grid[2][3]) ||
+        (grid[5][1] && grid[5][1] === grid[4][2] && grid[5][1] === grid[3][3] && grid[5][1] === grid[2][4]) ||
+        (grid[5][2] && grid[5][2] === grid[4][3] && grid[5][2] === grid[3][4] && grid[5][2] === grid[2][5])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[4][0] && grid[4][0] === grid[3][1] && grid[4][0] === grid[2][2] && grid[4][0] === grid[1][3]) ||
+        (grid[4][1] && grid[4][1] === grid[3][2] && grid[4][1] === grid[2][3] && grid[4][1] === grid[1][4]) ||
+        (grid[4][2] && grid[4][2] === grid[3][3] && grid[4][2] === grid[2][4] && grid[4][2] === grid[1][5])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[3][0] && grid[3][0] === grid[2][1] && grid[3][0] === grid[1][2] && grid[3][0] === grid[0][3]) ||
+        (grid[3][1] && grid[3][1] === grid[2][2] && grid[3][1] === grid[1][3] && grid[3][1] === grid[0][4]) ||
+        (grid[3][2] && grid[3][2] === grid[2][3] && grid[3][2] === grid[1][4] && grid[3][2] === grid[0][5])
+    ) {
+        return whosTurn || winner;
+    }
+    // starting top left corner 
+    
+    if (
+        (grid[0][5] && grid[0][5] === grid[1][4] && grid[0][5] === grid[2][3] && grid[0][5] === grid[3][2]) ||
+        (grid[0][4] && grid[0][4] === grid[1][3] && grid[0][4] === grid[2][2] && grid[0][4] === grid[3][1]) ||
+        (grid[0][3] && grid[0][3] === grid[1][2] && grid[0][3] === grid[2][1] && grid[0][3] === grid[3][0])
+    ) {
+        return whosTurn || winner;
+    }
+    if (
+        (grid[1][5] && grid[1][5] === grid[2][4] && grid[1][5] === grid[3][3] && grid[1][5] === grid[4][2]) ||
+        (grid[1][4] && grid[1][4] === grid[2][3] && grid[1][4] === grid[3][2] && grid[1][4] === grid[4][1]) ||
+        (grid[1][3] && grid[1][3] === grid[2][2] && grid[1][3] === grid[3][1] && grid[1][3] === grid[4][0])
+    ) {
+        return whosTurn || winner;
+    }
+    if (
+        (grid[2][5] && grid[2][5] === grid[3][4] && grid[2][5] === grid[4][3] && grid[2][5] === grid[5][2]) ||
+        (grid[2][4] && grid[2][4] === grid[3][3] && grid[2][4] === grid[4][2] && grid[2][4] === grid[5][1]) ||
+        (grid[2][3] && grid[2][3] === grid[3][2] && grid[2][3] === grid[4][1] && grid[2][3] === grid[5][0])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[3][5] && grid[3][5] === grid[4][4] && grid[3][5] === grid[5][3] && grid[3][5] === grid[6][2]) ||
+        (grid[3][4] && grid[3][4] === grid[4][3] && grid[3][4] === grid[5][2] && grid[3][4] === grid[6][1]) ||
+        (grid[3][3] && grid[3][3] === grid[4][2] && grid[3][3] === grid[5][1] && grid[3][3] === grid[6][0])
+    ) {
+        return whosTurn || winner;
+    }
+    // starting tip R corner diagonal at [6][6] 
+    if (
+        (grid[6][5] && grid[6][5] === grid[5][4] && grid[6][5] === grid[4][3] && grid[6][5] === grid[3][2]) ||
+        (grid[6][4] && grid[6][4] === grid[5][3] && grid[6][4] === grid[4][2] && grid[6][4] === grid[3][1]) ||
+        (grid[6][3] && grid[6][3] === grid[5][2] && grid[6][3] === grid[4][1] && grid[6][3] === grid[3][0])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[5][5] && grid[5][5] === grid[4][4] && grid[5][5] === grid[3][3] && grid[5][5] === grid[2][2]) ||
+        (grid[5][4] && grid[5][4] === grid[4][3] && grid[5][4] === grid[3][2] && grid[5][4] === grid[2][1]) ||
+        (grid[5][3] && grid[5][3] === grid[4][2] && grid[5][3] === grid[3][1] && grid[5][3] === grid[2][0])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[4][5] && grid[4][5] === grid[3][4] && grid[4][5] === grid[2][3] && grid[4][5] === grid[1][2]) ||
+        (grid[4][4] && grid[4][4] === grid[3][3] && grid[4][4] === grid[2][2] && grid[4][4] === grid[1][1]) ||
+        (grid[4][3] && grid[4][3] === grid[3][2] && grid[4][3] === grid[2][1] && grid[4][3] === grid[1][0])
+    ) {
+        return whosTurn || winner;
+    }
+    
+    if (
+        (grid[3][5] && grid[3][5] === grid[2][4] && grid[3][5] === grid[1][3] && grid[3][5] === grid[0][2]) ||
+        (grid[3][4] && grid[3][4] === grid[2][3] && grid[3][4] === grid[1][2] && grid[3][4] === grid[0][1]) ||
+        (grid[3][3] && grid[3][3] === grid[2][2] && grid[3][3] === grid[1][1] && grid[3][3] === grid[0][0])
+    ) {
+        return whosTurn || winner;
+    }
+    
+
 }
-    // check Diagonal
-    // for loop here
-//         if (
-//             (grid[0][0] && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2] && grid[0][0] === grid[3][3]) ||
-//             (grid[0][1] && grid[0][1] === grid[1][2] && grid[0][1] === grid[2][3] && grid[0][1] === grid[3][4]) ||
-//             (grid[0][2] && grid[0][2] === grid[1][3] && grid[0][2] === grid[2][4] && grid[0][2] === grid[3][5])
-//         )
-        
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[2][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[2][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[2][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-//         if (
-//             (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-//             (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-//             (grid[1][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
-//         )
-// }
 
 init(); // calling initiate
 render(); // calling render
