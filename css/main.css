@@ -18,24 +18,24 @@ h1 {
 .col {
     display: flex;
     flex-direction: column-reverse;
-    
 }
 
 .col:hover div {
     background-color: gainsboro;
     transform: scale(.90);
     transition: .07s;
-    cursor: progress;
+    cursor: no-drop;
 }
 
 div.col div {
     display: flex;
     background-color: white;
     opacity: 50%;
-    height: 75px;
-    width: 75px;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
     overflow: hidden;
+    border: 3px solid royalblue;
 }
 
 .yellow {

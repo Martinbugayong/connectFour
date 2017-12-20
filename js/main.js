@@ -25,7 +25,7 @@ function init() { // Create a function (initialize) with a grid array of columns
         [null, null, null, null, null, null]
     ]
     whosTurn = player1;
-    winner = false;
+    // winner = false;
 }
 
 /*----- handle click -----*/
@@ -58,7 +58,7 @@ function render() {
 }
 
 function getWinner() { // winning game logic. 
-
+ 
 }
 
 init(); // calling initiate
