@@ -2,7 +2,7 @@
 var player1 = 'r';
 var player2 = 'y';
 
-/*----- APP'S STATE (variables) -----*/ 
+/*----- APP'S STATE (variables) -----*/
 var whosTurn;
 var grid;
 var winner;
@@ -16,16 +16,16 @@ document.getElementById('grid').addEventListener('click', handleClick) //entire 
 /*----- MAIN FUNCTIONS -----*/
 function init() { // Create a function (initialize) with a grid array of columns(down) and rows(across) 
     grid = [
-        [null, null, null, null, null, null],
-        [null, null, null, null, null, null],
-        [null, null, null, null, null, null],
-        [null, null, null, null, null, null],
-        [null, null, null, null, null, null],
-        [null, null, null, null, null, null],
-        [null, null, null, null, null, null]
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', '']
     ]
     whosTurn = player1;
-    // winner = false;
+    winner = false;
 }
 
 /*----- handle click -----*/
@@ -33,7 +33,7 @@ function handleClick(e) { // create function that handles clicking of the game g
     var colDiv = e.target.id ? e.target : e.target.parentElement; // setting colDiv to event target id ternary 
     var colIdx = parseInt(colDiv.id.replace('col', '')); //setting colIdx value
     var column = grid[colIdx]; // setting column to grid value of [colIdx]
-    var firstAvalSlot = column.indexOf(null); // setting firstAvalSlot to the indexof column lookiong for (null)
+    var firstAvalSlot = column.indexOf(''); // setting firstAvalSlot to the indexof column lookiong for ('')
     if (firstAvalSlot === -1) return; // if firstAvalSlot is equal to -1 (no slots avaliable)
     column[firstAvalSlot] = whosTurn; // setting whosTurn to column value of firstAvalSlot
     whosTurn = (whosTurn === player1) ? player2 : player1; // Ternary, setting whos turn to player 1 or 2. (Switch turn function)
@@ -58,8 +58,28 @@ function render() {
 }
 
 function getWinner() { // winning game logic. 
- 
-}
+    // checkVertical
+    for (var i = 0; i < grid.length; i++) {
+        if (
+            (grid[i][0] === grid[i][1] && grid[i][0] === grid[i][2] && grid[i][0] === grid[i][3]) ||
+            (grid[i][1] === grid[i][2] && grid[i][1] === grid[i][3] && grid[i][1] === grid[i][4]) ||
+            (grid[i][2] === grid[i][3] && grid[i][2] === grid[i][4] && grid[i][2] === grid[i][5]) 
+        ) { 
+            return true;
+        }
+    }
+    // checkHorizontal
+    for (var j = 0; j < grid[0].length; j++){
+        if (
+            (grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j]) ||
+            (grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j]) ||
+            (grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j] && grid[i][j] === grid[i][j])
+        ){
+            return true;
+        }
+    }
+    
+    // checkDiagonal
 
 init(); // calling initiate
 render(); // calling render
