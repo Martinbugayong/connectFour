@@ -4,7 +4,7 @@
 
 /*----- CONSTANTS (these will never change) -----*/
 var player1 = 'r';
-var player2 = 'b';
+var player2 = 'y';
 
 /*----- APP'S STATE (variables) -----*/ 
 var whosTurn;
@@ -50,11 +50,11 @@ function render() {
     for (var i = 0; i < grid.length; i++) { // for loop that iterated through grid arrays (columns)
         var columnDivs = document.querySelectorAll(`#col${i} div`); // setting columnDivs to the column id and div number (coordinates)
         for (var j = 0; j < grid[i].length; j++) { // for loop setting var J to itterate through the grid[i].length which are the rows
-            if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'r' ? 'red' : 'black'; // in JS styling for moves using ternary operator. 
+            if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'r' ? 'red' : 'yellow'; // in JS styling for moves using ternary operator. 
         }
     }
     if (winner) { // winning messages 
-        msgEl.innerHTML = 'Congrats, to player ' + (winner === player1 ? 'Red' : 'Black'); // if conditions have been met game renders this
+        msgEl.innerHTML = 'Congrats, to player ' + (winner === player1 ? 'Red' : 'Yellow'); // if conditions have been met game renders this
     } else { // if no one wins
         msgEl.innerHTML = 'Player ' + (whosTurn === player1 ? '1\'s' : '2\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
 
