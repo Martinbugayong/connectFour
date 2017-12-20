@@ -13,6 +13,7 @@ h1 {
     max-height: 100%;
     padding: 8px;
     background-color:royalblue;
+    border-radius: 8%;
 }
 
 .col {
