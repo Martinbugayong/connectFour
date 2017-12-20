@@ -1,7 +1,3 @@
-// = ---> SETTING VALUE
-// == ---> COMPARE (Expression, equates to true or false) (1 === true) is true
-// === ---> COMPARES but STRICTER, must be same type. (1 === true) is false
-
 /*----- CONSTANTS (these will never change) -----*/
 var player1 = 'r';
 var player2 = 'y';
