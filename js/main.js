@@ -46,11 +46,11 @@ function render() {
     for (var i = 0; i < grid.length; i++) { // for loop that iterated through grid arrays (columns)
         var columnDivs = document.querySelectorAll(`#col${i} div`); // setting columnDivs to the column id and div number (coordinates)
         for (var j = 0; j < grid[i].length; j++) { // for loop setting var J to itterate through the grid[i].length which are the rows
-            if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'r' ? 'red' : 'yellow'; // in JS styling for moves using ternary operator. 
+            if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'r' ? 'red' : 'Purple'; // in JS styling for moves using ternary operator. 
         }
     }
     if (winner) { // winning messages 
-        msgEl.innerHTML = `Congrats! ${(winner === player1 ? 'Red' : 'Yellow')} Player Wins!`; // if conditions have been met game renders this
+        msgEl.innerHTML = `Congrats! ${(winner === player1 ? 'Red' : 'Purple')} Player Wins!`; // if conditions have been met game renders this
     } else { // if no one wins
         msgEl.innerHTML = 'Player ' + (whosTurn === player1 ? '1\'s' : '2\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
 
@@ -97,9 +97,9 @@ function getWinner() { // winning game logic.
     }
     
     if (
-        (grid[2][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
-        (grid[2][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
-        (grid[2][2] && grid[1][2] === grid[2][3] && grid[1][2] === grid[3][4] && grid[1][2] === grid[4][5])
+        (grid[2][0] && grid[2][0] === grid[2][1] && grid[2][0] === grid[3][2] && grid[2][0] === grid[4][3]) ||
+        (grid[2][1] && grid[2][1] === grid[2][2] && grid[2][1] === grid[3][3] && grid[2][1] === grid[4][4]) ||
+        (grid[2][2] && grid[2][2] === grid[2][3] && grid[2][2] === grid[3][4] && grid[2][2] === grid[4][5])
     ) {
         return whosTurn
     }

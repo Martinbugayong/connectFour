@@ -1,6 +1,6 @@
 h1 {
     text-align: center;
-    color: royalblue;
+    color: red;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -12,7 +12,7 @@ h1 {
     max-width: 100%;
     max-height: 100%;
     padding: 8px;
-    background-color:royalblue;
+    background: linear-gradient( red,purple);
     border-radius: 8%;
 }
 
@@ -36,11 +36,11 @@ div.col div {
     width: 70px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid royalblue;
+    border: 3px solid black;
 }
 
-.yellow {
-    background-color:yellow;
+.purple {
+    background-color:rgb(185, 40, 185);
 }
 
 .red {
@@ -57,14 +57,16 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url(https://img00.deviantart.net/ee44/i/2012/366/1/0/evil_ryu_vs_oni_akuma_by_legendarysatera-d5pxsni.png);
+    background-size: cover;
+    background-position: center;
 }
 
 #message {
     display: flex;
     justify-content: center;
-    font-family: sans-serif;
     font-size: 30px;
-    color: black;
+    color:white;
     font-style: italic;
     font-family: Arial, Helvetica, sans-serif;
 }
