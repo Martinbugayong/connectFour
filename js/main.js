@@ -1,5 +1,5 @@
 /*----- CONSTANTS (these will never change) -----*/
-var player1 = 'r';
+var player1 = 'Evil Ryu';
 var player2 = 'y';
 
 /*----- APP'S STATE (variables) -----*/
@@ -9,6 +9,12 @@ var winner;
 
 /*----- CACHED ELEMENT REFERENCES -----*/
 var msgEl = document.getElementById('message');
+
+/*----- RESET -----*/
+document.getElementById('reset').addEventListener('click',function(){
+    init();
+    render();
+})
 
 /*----- EVENT LISTINERS -----*/
 document.getElementById('grid').addEventListener('click', handleClick) //entire grid is clickable 
@@ -47,17 +53,18 @@ function render() {
     for (var i = 0; i < grid.length; i++) { // for loop that iterated through grid arrays (columns)
         var columnDivs = document.querySelectorAll(`#col${i} div`); // setting columnDivs to the column id and div number (coordinates)
         for (var j = 0; j < grid[i].length; j++) { // for loop setting var J to itterate through the grid[i].length which are the rows
-            if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'r' ? 'red' : 'Purple'; // in JS styling for moves using ternary operator. 
-            if (!grid[i][j]) columnDivs[j].style.backgroundColor = "#fff"
+            if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'Evil Ryu' ? 'red' : 'purple'; // in JS styling for moves using ternary operator. 
+            if (!grid[i][j]) columnDivs[j].style.backgroundColor = "gainsboro"
         }
     }
     if (winner) { // winning messages 
-        msgEl.innerHTML = `Congrats! ${(winner === player1 ? 'Red' : 'Purple')} Player Wins!`; // if conditions have been met game renders this
+        msgEl.innerHTML = `${(winner === player1 ? 'Evil Ryu' : 'Akuma')} Wins!`; // if conditions have been met game renders this
     } else { // if no one wins
-        msgEl.innerHTML = 'Player ' + (whosTurn === player1 ? '1\'s' : '2\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
+        msgEl.innerHTML = (whosTurn === player1 ? 'Evil ryu\'s' : 'Akuma\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
     }
 }
 
+/*----- winner -----*/
 function getWinner() { // winning game logic. 
     // check vertical
     for (var i = 0; i < grid.length; i++) {
@@ -80,15 +87,16 @@ function getWinner() { // winning game logic.
             return whosTurn
         }
     }
-
-    if (
-        (grid[0][0] && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2] && grid[0][0] === grid[3][3]) ||
-        (grid[0][1] && grid[0][1] === grid[1][2] && grid[0][1] === grid[2][3] && grid[0][1] === grid[3][4]) ||
-        (grid[0][2] && grid[0][2] === grid[1][3] && grid[0][2] === grid[2][4] && grid[0][2] === grid[3][5])
-    ) {
+    //Diag up [0][0]
+    for (var d = 0; d < grid[1].length; d++) {
+        if (
+            (grid[0][0] && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2] && grid[0][0] === grid[3][3]) ||
+            (grid[0][1] && grid[0][1] === grid[1][2] && grid[0][1] === grid[2][3] && grid[0][1] === grid[3][4]) ||
+            (grid[0][2] && grid[0][2] === grid[1][3] && grid[0][2] === grid[2][4] && grid[0][2] === grid[3][5])
+        ) {
         return whosTurn
+        }
     }
-    
     if (
         (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
         (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
@@ -112,7 +120,7 @@ function getWinner() { // winning game logic.
     ) {
         return whosTurn
     }
-    // starting at bottom right [6][0]
+    // Diag up [6][0]
     if (
         (grid[6][0] && grid[6][0] === grid[5][1] && grid[6][0] === grid[4][2] && grid[6][0] === grid[3][3]) ||
         (grid[6][1] && grid[6][1] === grid[5][2] && grid[6][1] === grid[4][3] && grid[6][1] === grid[3][4]) ||
@@ -144,8 +152,7 @@ function getWinner() { // winning game logic.
     ) {
         return whosTurn
     }
-    // starting top left corner 
-    
+    // Diag down [0][5] 
     if (
         (grid[0][5] && grid[0][5] === grid[1][4] && grid[0][5] === grid[2][3] && grid[0][5] === grid[3][2]) ||
         (grid[0][4] && grid[0][4] === grid[1][3] && grid[0][4] === grid[2][2] && grid[0][4] === grid[3][1]) ||
@@ -175,7 +182,7 @@ function getWinner() { // winning game logic.
     ) {
         return whosTurn
     }
-    // starting tip R corner diagonal at [6][6] 
+    // Diag down [6][6] 
     if (
         (grid[6][5] && grid[6][5] === grid[5][4] && grid[6][5] === grid[4][3] && grid[6][5] === grid[3][2]) ||
         (grid[6][4] && grid[6][4] === grid[5][3] && grid[6][4] === grid[4][2] && grid[6][4] === grid[3][1]) ||
@@ -207,6 +214,5 @@ function getWinner() { // winning game logic.
     ) {
         return whosTurn
     }
-    
 }
-init(); // calling initiate
+init(); 
