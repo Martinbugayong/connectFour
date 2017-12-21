@@ -98,9 +98,9 @@ function getWinner() { // winning game logic.
     }
     
     if (
-        (grid[2][0] && grid[2][0] === grid[2][1] && grid[2][0] === grid[3][2] && grid[2][0] === grid[4][3]) ||
-        (grid[2][1] && grid[2][1] === grid[2][2] && grid[2][1] === grid[3][3] && grid[2][1] === grid[4][4]) ||
-        (grid[2][2] && grid[2][2] === grid[2][3] && grid[2][2] === grid[3][4] && grid[2][2] === grid[4][5])
+        (grid[2][0] && grid[2][0] === grid[3][1] && grid[2][0] === grid[4][2] && grid[2][0] === grid[5][3]) ||
+        (grid[2][1] && grid[2][1] === grid[3][2] && grid[2][1] === grid[4][3] && grid[2][1] === grid[5][4]) ||
+        (grid[2][2] && grid[2][2] === grid[3][3] && grid[2][2] === grid[4][4] && grid[2][2] === grid[5][5])
     ) {
         return whosTurn
     }
@@ -208,7 +208,5 @@ function getWinner() { // winning game logic.
         return whosTurn
     }
     
-
 }
-
 init(); // calling initiate
