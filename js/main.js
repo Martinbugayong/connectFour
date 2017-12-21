@@ -26,6 +26,7 @@ function init() { // Create a function (initialize) with a grid array of columns
     ]
     whosTurn = player1;
     winner = false;
+    render()
 }
 
 /*----- handle click -----*/
@@ -47,13 +48,13 @@ function render() {
         var columnDivs = document.querySelectorAll(`#col${i} div`); // setting columnDivs to the column id and div number (coordinates)
         for (var j = 0; j < grid[i].length; j++) { // for loop setting var J to itterate through the grid[i].length which are the rows
             if (grid[i][j]) columnDivs[j].style.backgroundColor = grid[i][j] === 'r' ? 'red' : 'Purple'; // in JS styling for moves using ternary operator. 
+            if (!grid[i][j]) columnDivs[j].style.backgroundColor = "#fff"
         }
     }
     if (winner) { // winning messages 
         msgEl.innerHTML = `Congrats! ${(winner === player1 ? 'Red' : 'Purple')} Player Wins!`; // if conditions have been met game renders this
     } else { // if no one wins
         msgEl.innerHTML = 'Player ' + (whosTurn === player1 ? '1\'s' : '2\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
-
     }
 }
 
@@ -211,4 +212,3 @@ function getWinner() { // winning game logic.
 }
 
 init(); // calling initiate
-render(); // calling render
