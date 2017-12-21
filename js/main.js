@@ -1,6 +1,6 @@
 /*----- CONSTANTS (these will never change) -----*/
 var player1 = 'Evil Ryu';
-var player2 = 'y';
+var player2 = 'Akuma';
 
 /*----- APP'S STATE (variables) -----*/
 var whosTurn;
@@ -60,10 +60,9 @@ function render() {
     if (winner) { // winning messages 
         msgEl.innerHTML = `${(winner === player1 ? 'Evil Ryu' : 'Akuma')} Wins!`; // if conditions have been met game renders this
     } else { // if no one wins
-        msgEl.innerHTML = (whosTurn === player1 ? 'Evil ryu\'s' : 'Akuma\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
+        msgEl.innerHTML = (whosTurn === player1 ? 'Evil Ryu\'s' : 'Akuma\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
     }
 }
-
 /*----- winner -----*/
 function getWinner() { // winning game logic. 
     // check vertical
