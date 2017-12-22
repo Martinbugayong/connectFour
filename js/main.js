@@ -23,13 +23,13 @@ document.getElementById('grid').addEventListener('click', handleClick) //entire 
 /*----- MAIN FUNCTIONS -----*/
 function init() { // Create a function (initialize) with a grid array of columns(down) and rows(across) 
     grid = [
-        ['1', '3', '4', '5', '6', '3'],
-        ['a', 'b', 'v', 'x', 'x', 'z'],
-        ['s', 'a', 'a', 'a', 'e', 'b'],
-        ['1', 'a', 't', 'd', 'd', 'v'],
-        ['3', 'p', 'u', 'o', 'p', 'a'],
-        ['0', 'p', 'i', 'l', 'k', 'w'],
-        ['3', '', 'y', 'p', 'e', 'v']
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', '', '', '', '']
     ]
     whosTurn = player1;
     winner = false;
