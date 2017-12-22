@@ -9,7 +9,7 @@ var winner;
 
 /*----- CACHED ELEMENT REFERENCES -----*/
 var msgEl = document.getElementById('message');
-    msgEl.style.color = 'orangered' || 'purple';
+    msgEl.style.color = 'orangered';
 
 /*----- RESET -----*/
 document.getElementById('reset').addEventListener('click',function(){
@@ -59,10 +59,10 @@ function render() {
         }
     }
     if (winner) { // winning messages 
-        msgEl.innerHTML = `${(winner === player1 ? 'Evil Ryu' : 'Akuma')} Wins!`; // if conditions have been met game renders this
+        msgEl.innerHTML = `${(winner === player1 ? '<div class="ryu">Evil Ryu Wins!</div>' : '<div class="akuma">Akuma Wins!</div>')}`; // if conditions have been met game renders this
     } else { // if no one wins
-        msgEl.innerHTML = (whosTurn === player1 ? 'Evil Ryu\'s' : 'Akuma\'s') + ' Turn'; // then continue with the game setting whosTurn again. 
-    }
+        msgEl.innerHTML = (whosTurn === player1 ? '<div class="ryu">Evil Ryu\'s Turn</div>' : '<div class="akuma">Akuma\'s Turn</div>'); // then continue with the game setting whosTurn again. 
+    } 
 }
 /*----- winner -----*/
 function getWinner() { // winning game logic. 
@@ -88,15 +88,13 @@ function getWinner() { // winning game logic.
         }
     }
     //Diag up [0][0]
-    for (var d = 0; d < grid[1].length; d++) {
-        if (
-            (grid[0][0] && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2] && grid[0][0] === grid[3][3]) ||
-            (grid[0][1] && grid[0][1] === grid[1][2] && grid[0][1] === grid[2][3] && grid[0][1] === grid[3][4]) ||
-            (grid[0][2] && grid[0][2] === grid[1][3] && grid[0][2] === grid[2][4] && grid[0][2] === grid[3][5])
-        ) {
+    if (
+        (grid[0][0] && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2] && grid[0][0] === grid[3][3]) ||
+        (grid[0][1] && grid[0][1] === grid[1][2] && grid[0][1] === grid[2][3] && grid[0][1] === grid[3][4]) ||
+        (grid[0][2] && grid[0][2] === grid[1][3] && grid[0][2] === grid[2][4] && grid[0][2] === grid[3][5])
+    ) {
         return whosTurn
         }
-    }
     if (
         (grid[1][0] && grid[1][0] === grid[2][1] && grid[1][0] === grid[3][2] && grid[1][0] === grid[4][3]) ||
         (grid[1][1] && grid[1][1] === grid[2][2] && grid[1][1] === grid[3][3] && grid[1][1] === grid[4][4]) ||
@@ -212,16 +210,7 @@ function getWinner() { // winning game logic.
         (grid[3][4] && grid[3][4] === grid[2][3] && grid[3][4] === grid[1][2] && grid[3][4] === grid[0][1]) ||
         (grid[3][3] && grid[3][3] === grid[2][2] && grid[3][3] === grid[1][1] && grid[3][3] === grid[0][0])
     ) {
-        
-    function gameIsDraw() {
-        for (var i = 0; i <= grid.length ; i++) {
-            for (var j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] === 0) {
-                    return false;
-                }
-            }
-        }
+        return whosTurn
     }
-}
 }
 init(); 
