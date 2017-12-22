@@ -23,19 +23,19 @@ document.getElementById('grid').addEventListener('click', handleClick) //entire 
 /*----- MAIN FUNCTIONS -----*/
 function init() { // Create a function (initialize) with a grid array of columns(down) and rows(across) 
     grid = [
-        ['', '', '', '', '', ''],
-        ['', '', '', '', '', ''],
-        ['', '', '', '', '', ''],
-        ['', '', '', '', '', ''],
-        ['', '', '', '', '', ''],
-        ['', '', '', '', '', ''],
-        ['', '', '', '', '', '']
+        ['1', '3', '4', '5', '6', '3'],
+        ['a', 'b', 'v', 'x', 'x', 'z'],
+        ['s', 'a', 'a', 'a', 'e', 'b'],
+        ['1', 'a', 't', 'd', 'd', 'v'],
+        ['3', 'p', 'u', 'o', 'p', 'a'],
+        ['0', 'p', 'i', 'l', 'k', 'w'],
+        ['3', '', 'y', 'p', 'e', 'v']
     ]
     whosTurn = player1;
     winner = false;
+    tieGame = false;
     render()
 }
-
 /*----- handle click -----*/
 function handleClick(e) { // create function that handles clicking of the game grid.
     var colDiv = e.target.id ? e.target : e.target.parentElement; // setting colDiv to event target id ternary 
@@ -45,10 +45,10 @@ function handleClick(e) { // create function that handles clicking of the game g
     if (firstAvalSlot === -1 || winner) return; // if firstAvalSlot is equal to -1 (no slots avaliable)
     column[firstAvalSlot] = whosTurn; // setting whosTurn to column value of firstAvalSlot
     winner = getWinner(); // check for winner here
+    tieGame = checkForTie(); // check for winner here
     whosTurn = (whosTurn === player1) ? player2 : player1; // Ternary, setting whos turn to player 1 or 2. (Switch turn function)
     render(); // render function out here 
 }
-
 /*----- render function -----*/
 function render() {
     for (var i = 0; i < grid.length; i++) { // for loop that iterated through grid arrays (columns)
@@ -58,11 +58,22 @@ function render() {
             if (!grid[i][j]) columnDivs[j].style.backgroundColor = "gainsboro"
         }
     }
-    if (winner) { // winning messages 
+    if (tieGame) { 
+        msgEl.innerHTML = `tie game`
+    } else if (winner) { // winning messages 
         msgEl.innerHTML = `${(winner === player1 ? '<div class="ryu">Evil Ryu Wins!</div>' : '<div class="akuma">Akuma Wins!</div>')}`; // if conditions have been met game renders this
     } else { // if no one wins
         msgEl.innerHTML = (whosTurn === player1 ? '<div class="ryu">Evil Ryu\'s Turn</div>' : '<div class="akuma">Akuma\'s Turn</div>'); // then continue with the game setting whosTurn again. 
     } 
+}
+/*----- winner -----*/
+function checkForTie (){
+    for (var i = 0; i < grid.length; i++) {
+        for (var j = 0; j < grid[0].length; j++) {
+            if (grid[i][j] === '') return false;
+        }
+    }
+    return true;
 }
 /*----- winner -----*/
 function getWinner() { // winning game logic. 
@@ -76,7 +87,7 @@ function getWinner() { // winning game logic.
             return whosTurn
         }
     }
-    // check Horizontal
+    // check horizontal
     for (var j = 0; j < grid[0].length; j++) {
         if (
             (grid[0][j] && grid[0][j] === grid[1][j] && grid[0][j] === grid[2][j] && grid[0][j] === grid[3][j]) ||
@@ -87,7 +98,7 @@ function getWinner() { // winning game logic.
             return whosTurn
         }
     }
-    //Diag up [0][0]
+    //Diag up right[0][0]
     if (
         (grid[0][0] && grid[0][0] === grid[1][1] && grid[0][0] === grid[2][2] && grid[0][0] === grid[3][3]) ||
         (grid[0][1] && grid[0][1] === grid[1][2] && grid[0][1] === grid[2][3] && grid[0][1] === grid[3][4]) ||
@@ -118,7 +129,7 @@ function getWinner() { // winning game logic.
     ) {
         return whosTurn
     }
-    // Diag up [6][0]
+    // Diag up left [6][0]
     if (
         (grid[6][0] && grid[6][0] === grid[5][1] && grid[6][0] === grid[4][2] && grid[6][0] === grid[3][3]) ||
         (grid[6][1] && grid[6][1] === grid[5][2] && grid[6][1] === grid[4][3] && grid[6][1] === grid[3][4]) ||
@@ -147,68 +158,6 @@ function getWinner() { // winning game logic.
         (grid[3][0] && grid[3][0] === grid[2][1] && grid[3][0] === grid[1][2] && grid[3][0] === grid[0][3]) ||
         (grid[3][1] && grid[3][1] === grid[2][2] && grid[3][1] === grid[1][3] && grid[3][1] === grid[0][4]) ||
         (grid[3][2] && grid[3][2] === grid[2][3] && grid[3][2] === grid[1][4] && grid[3][2] === grid[0][5])
-    ) {
-        return whosTurn
-    }
-    // Diag down [0][5] 
-    if (
-        (grid[0][5] && grid[0][5] === grid[1][4] && grid[0][5] === grid[2][3] && grid[0][5] === grid[3][2]) ||
-        (grid[0][4] && grid[0][4] === grid[1][3] && grid[0][4] === grid[2][2] && grid[0][4] === grid[3][1]) ||
-        (grid[0][3] && grid[0][3] === grid[1][2] && grid[0][3] === grid[2][1] && grid[0][3] === grid[3][0])
-    ) {
-        return whosTurn
-    }
-    if (
-        (grid[1][5] && grid[1][5] === grid[2][4] && grid[1][5] === grid[3][3] && grid[1][5] === grid[4][2]) ||
-        (grid[1][4] && grid[1][4] === grid[2][3] && grid[1][4] === grid[3][2] && grid[1][4] === grid[4][1]) ||
-        (grid[1][3] && grid[1][3] === grid[2][2] && grid[1][3] === grid[3][1] && grid[1][3] === grid[4][0])
-    ) {
-        return whosTurn
-    }
-    if (
-        (grid[2][5] && grid[2][5] === grid[3][4] && grid[2][5] === grid[4][3] && grid[2][5] === grid[5][2]) ||
-        (grid[2][4] && grid[2][4] === grid[3][3] && grid[2][4] === grid[4][2] && grid[2][4] === grid[5][1]) ||
-        (grid[2][3] && grid[2][3] === grid[3][2] && grid[2][3] === grid[4][1] && grid[2][3] === grid[5][0])
-    ) {
-        return whosTurn
-    }
-    
-    if (
-        (grid[3][5] && grid[3][5] === grid[4][4] && grid[3][5] === grid[5][3] && grid[3][5] === grid[6][2]) ||
-        (grid[3][4] && grid[3][4] === grid[4][3] && grid[3][4] === grid[5][2] && grid[3][4] === grid[6][1]) ||
-        (grid[3][3] && grid[3][3] === grid[4][2] && grid[3][3] === grid[5][1] && grid[3][3] === grid[6][0])
-    ) {
-        return whosTurn
-    }
-    // Diag down [6][6] 
-    if (
-        (grid[6][5] && grid[6][5] === grid[5][4] && grid[6][5] === grid[4][3] && grid[6][5] === grid[3][2]) ||
-        (grid[6][4] && grid[6][4] === grid[5][3] && grid[6][4] === grid[4][2] && grid[6][4] === grid[3][1]) ||
-        (grid[6][3] && grid[6][3] === grid[5][2] && grid[6][3] === grid[4][1] && grid[6][3] === grid[3][0])
-    ) {
-        return whosTurn
-    }
-    
-    if (
-        (grid[5][5] && grid[5][5] === grid[4][4] && grid[5][5] === grid[3][3] && grid[5][5] === grid[2][2]) ||
-        (grid[5][4] && grid[5][4] === grid[4][3] && grid[5][4] === grid[3][2] && grid[5][4] === grid[2][1]) ||
-        (grid[5][3] && grid[5][3] === grid[4][2] && grid[5][3] === grid[3][1] && grid[5][3] === grid[2][0])
-    ) {
-        return whosTurn
-    }
-    
-    if (
-        (grid[4][5] && grid[4][5] === grid[3][4] && grid[4][5] === grid[2][3] && grid[4][5] === grid[1][2]) ||
-        (grid[4][4] && grid[4][4] === grid[3][3] && grid[4][4] === grid[2][2] && grid[4][4] === grid[1][1]) ||
-        (grid[4][3] && grid[4][3] === grid[3][2] && grid[4][3] === grid[2][1] && grid[4][3] === grid[1][0])
-    ) {
-        return whosTurn
-    }
-    
-    if (
-        (grid[3][5] && grid[3][5] === grid[2][4] && grid[3][5] === grid[1][3] && grid[3][5] === grid[0][2]) ||
-        (grid[3][4] && grid[3][4] === grid[2][3] && grid[3][4] === grid[1][2] && grid[3][4] === grid[0][1]) ||
-        (grid[3][3] && grid[3][3] === grid[2][2] && grid[3][3] === grid[1][1] && grid[3][3] === grid[0][0])
     ) {
         return whosTurn
     }
