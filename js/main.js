@@ -9,6 +9,7 @@ var winner;
 
 /*----- CACHED ELEMENT REFERENCES -----*/
 var msgEl = document.getElementById('message');
+    msgEl.style.color = 'orangered' || 'purple';
 
 /*----- RESET -----*/
 document.getElementById('reset').addEventListener('click',function(){
@@ -211,7 +212,16 @@ function getWinner() { // winning game logic.
         (grid[3][4] && grid[3][4] === grid[2][3] && grid[3][4] === grid[1][2] && grid[3][4] === grid[0][1]) ||
         (grid[3][3] && grid[3][3] === grid[2][2] && grid[3][3] === grid[1][1] && grid[3][3] === grid[0][0])
     ) {
-        return whosTurn
+        
+    function gameIsDraw() {
+        for (var i = 0; i <= grid.length ; i++) {
+            for (var j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] === 0) {
+                    return false;
+                }
+            }
+        }
     }
+}
 }
 init(); 

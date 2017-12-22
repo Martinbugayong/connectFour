@@ -12,7 +12,7 @@ h1 {
     max-width: 100%;
     max-height: 100%;
     padding: 8px;
-    background: linear-gradient(to right,orangered ,rgb(140, 109, 190));
+    background: linear-gradient(to right, rgb(200, 6, 0) ,rgb(35, 11, 55));
     border-radius: 8%;
 }
 
@@ -75,14 +75,17 @@ body {
 }
 
 #reset {
-    color: red;
     font-family:  'Permanent Marker', cursive;
     font-size: 25px;
     margin-bottom: 5px;
     background: none;
     border: none;
+    outline: 0;
 }
 
 button:hover {
+    color: red;
     cursor: pointer;
+    transform: scale(2.0);
+    transition: .07s;
 }
