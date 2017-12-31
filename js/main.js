@@ -9,16 +9,19 @@ var winner;
 
 /*----- CACHED ELEMENT REFERENCES -----*/
 var msgEl = document.getElementById('message');
-    msgEl.style.color = 'orangered';
+    msgEl.style.color = 'red';
+
+var audio = document.getElementById('audioPlayer');
 
 /*----- RESET -----*/
 document.getElementById('reset').addEventListener('click',function(){
     init();
     render();
-})
+});
 
 /*----- EVENT LISTINERS -----*/
-document.getElementById('grid').addEventListener('click', handleClick) //entire grid is clickable 
+document.getElementById('grid').addEventListener('click', handleClick); //entire grid is clickable 
+document.getElementById('toggleA').addEventListener('change', handleToggle);
 
 /*----- MAIN FUNCTIONS -----*/
 function init() { // Create a function (initialize) with a grid array of columns(down) and rows(across) 
@@ -34,7 +37,7 @@ function init() { // Create a function (initialize) with a grid array of columns
     whosTurn = player1;
     winner = false;
     tieGame = false;
-    render()
+    render();
 }
 /*----- handle click -----*/
 function handleClick(e) { // create function that handles clicking of the game grid.
@@ -49,6 +52,10 @@ function handleClick(e) { // create function that handles clicking of the game g
     whosTurn = (whosTurn === player1) ? player2 : player1; // Ternary, setting whos turn to player 1 or 2. (Switch turn function)
     render(); // render function out here 
 }
+function handleToggle(e) {
+    e.target.checked ? audio.play() : audio.pause();
+}
+
 /*----- render function -----*/
 function render() {
     for (var i = 0; i < grid.length; i++) { // for loop that iterated through grid arrays (columns)
@@ -59,24 +66,24 @@ function render() {
         }
     }
     if (tieGame) { 
-        msgEl.innerHTML = `tie game`
+        msgEl.innerHTML = `Tie Game!` // display tie game
     } else if (winner) { // winning messages 
         msgEl.innerHTML = `${(winner === player1 ? '<div class="ryu">Evil Ryu Wins!</div>' : '<div class="akuma">Akuma Wins!</div>')}`; // if conditions have been met game renders this
     } else { // if no one wins
         msgEl.innerHTML = (whosTurn === player1 ? '<div class="ryu">Evil Ryu\'s Turn</div>' : '<div class="akuma">Akuma\'s Turn</div>'); // then continue with the game setting whosTurn again. 
     } 
 }
-/*----- winner -----*/
-function checkForTie (){
-    for (var i = 0; i < grid.length; i++) {
-        for (var j = 0; j < grid[0].length; j++) {
-            if (grid[i][j] === '') return false;
+/*----- tie condition -----*/
+function checkForTie (){ // tie game. 
+    for (var i = 0; i < grid.length; i++) { // iterates through the initial arrays
+        for (var j = 0; j < grid[0].length; j++) { // iterates through arrays in arrays.
+            if (grid[i][j] === '') return false; 
         }
     }
     return true;
 }
 /*----- winner -----*/
-function getWinner() { // winning game logic. 
+function getWinner() { // winning game logic... sheer will. 
     // check vertical
     for (var i = 0; i < grid.length; i++) {
         if (
